@@ -22,15 +22,12 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-@EnableConfigurationProperties(ServiceProperties.class)
+@EnableConfigurationProperties(RtspSimpleServerApiWrapperServiceProperties.class)
 public class RtspSimpleServerApiWrapperService {
 
-    Logger LOGGER = LoggerFactory.getLogger(RtspSimpleServerApiWrapperService.class);
+    final static Logger LOGGER = LoggerFactory.getLogger(RtspSimpleServerApiWrapperService.class);
 
-    private final ServiceProperties serviceProperties;
-
-//    @Value("${rtspsimpleserver.baseurl:http://localhost:8999}")
-//    private String rtspSimpleServerBaseUrl;
+    private final RtspSimpleServerApiWrapperServiceProperties rtspSimpleServerApiWrapperServiceProperties;
 
     private final RestTemplate restTemplate;
 
@@ -120,89 +117,89 @@ public class RtspSimpleServerApiWrapperService {
     }
 
     private String getConfUrl() {
-	String url = serviceProperties.getServerBaseurl() + WebMvcLinkBuilder
+	String url = rtspSimpleServerApiWrapperServiceProperties.getServerBaseurl() + WebMvcLinkBuilder
 		.linkTo(WebMvcLinkBuilder.methodOn(V1Api.class).configGet()).withSelfRel().toUri().getPath();
-	LOGGER.info("configGet=" + url);
+	LOGGER.debug("configGet=" + url);
 	return url;
     }
 
     private String setConfUrl() {
-	String url = serviceProperties.getServerBaseurl() + WebMvcLinkBuilder
+	String url = rtspSimpleServerApiWrapperServiceProperties.getServerBaseurl() + WebMvcLinkBuilder
 		.linkTo(WebMvcLinkBuilder.methodOn(V1Api.class).configSet(null)).withSelfRel().toUri().getPath();
-	LOGGER.info("configSet=" + url);
+	LOGGER.debug("configSet=" + url);
 	return url;
     }
 
     private String addPathConfigUrl(String pathName) {
-	String url = serviceProperties.getServerBaseurl()
+	String url = rtspSimpleServerApiWrapperServiceProperties.getServerBaseurl()
 		+ WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(V1Api.class).configPathsAdd(pathName, null))
 			.withSelfRel().toUri().getPath();
-	LOGGER.info("configPathsAdd=" + url);
+	LOGGER.debug("configPathsAdd=" + url);
 	return url;
     }
 
     private String editPathConfigUrl(String pathName) {
-	String url = serviceProperties.getServerBaseurl()
+	String url = rtspSimpleServerApiWrapperServiceProperties.getServerBaseurl()
 		+ WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(V1Api.class).configPathsEdit(pathName, null))
 			.withSelfRel().toUri().getPath();
-	LOGGER.info("configPathsEdit=" + url);
+	LOGGER.debug("configPathsEdit=" + url);
 	return url;
     }
 
     private String removePathConfigUrl(String pathName) {
-	String url = serviceProperties.getServerBaseurl()
+	String url = rtspSimpleServerApiWrapperServiceProperties.getServerBaseurl()
 		+ WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(V1Api.class).configPathsRemove(pathName))
 			.withSelfRel().toUri().getPath();
-	LOGGER.info("configPathsRemove=" + url);
+	LOGGER.debug("configPathsRemove=" + url);
 	return url;
     }
 
     private String getPathsListUrl() {
-	String url = serviceProperties.getServerBaseurl() + WebMvcLinkBuilder
+	String url = rtspSimpleServerApiWrapperServiceProperties.getServerBaseurl() + WebMvcLinkBuilder
 		.linkTo(WebMvcLinkBuilder.methodOn(V1Api.class).pathsList()).withSelfRel().toUri().getPath();
-	LOGGER.info("pathsList=" + url);
+	LOGGER.debug("pathsList=" + url);
 	return url;
     }
 
     private String getRtmpConnsListUrl() {
-	String url = serviceProperties.getServerBaseurl() + WebMvcLinkBuilder
+	String url = rtspSimpleServerApiWrapperServiceProperties.getServerBaseurl() + WebMvcLinkBuilder
 		.linkTo(WebMvcLinkBuilder.methodOn(V1Api.class).rtmpConnsList()).withSelfRel().toUri().getPath();
-	LOGGER.info("rtmpConnsList=" + url);
+	LOGGER.debug("rtmpConnsList=" + url);
 	return url;
     }
 
     private String getRtspSessionsListUrl() {
-	String url = serviceProperties.getServerBaseurl() + WebMvcLinkBuilder
+	String url = rtspSimpleServerApiWrapperServiceProperties.getServerBaseurl() + WebMvcLinkBuilder
 		.linkTo(WebMvcLinkBuilder.methodOn(V1Api.class).rtspSessionsList()).withSelfRel().toUri().getPath();
-	LOGGER.info("rtspSessionsList=" + url);
+	LOGGER.debug("rtspSessionsList=" + url);
 	return url;
     }
 
     private String getRtspsSessionsListUrl() {
-	String url = serviceProperties.getServerBaseurl() + WebMvcLinkBuilder
+	String url = rtspSimpleServerApiWrapperServiceProperties.getServerBaseurl() + WebMvcLinkBuilder
 		.linkTo(WebMvcLinkBuilder.methodOn(V1Api.class).rtspsSessionsList()).withSelfRel().toUri().getPath();
-	LOGGER.info("rtspsSessionsList=" + url);
+	LOGGER.debug("rtspsSessionsList=" + url);
 	return url;
     }
 
     private String kickRtmpConnUrl(String id) {
-	String url = serviceProperties.getServerBaseurl() + WebMvcLinkBuilder
+	String url = rtspSimpleServerApiWrapperServiceProperties.getServerBaseurl() + WebMvcLinkBuilder
 		.linkTo(WebMvcLinkBuilder.methodOn(V1Api.class).rtmpConnsKick(id)).withSelfRel().toUri().getPath();
-	LOGGER.info("rtmpConnsKick=" + url);
+	LOGGER.debug("rtmpConnsKick=" + url);
 	return url;
     }
 
     private String kickRtspConnUrl(String id) {
-	String url = serviceProperties.getServerBaseurl() + WebMvcLinkBuilder
+	String url = rtspSimpleServerApiWrapperServiceProperties.getServerBaseurl() + WebMvcLinkBuilder
 		.linkTo(WebMvcLinkBuilder.methodOn(V1Api.class).rtspSessionsKick(id)).withSelfRel().toUri().getPath();
-	LOGGER.info("rtspSessionsKick=" + url);
+	LOGGER.debug("rtspSessionsKick=" + url);
 	return url;
     }
 
     private String kickRtspsConnUrl(String id) {
-	String url = serviceProperties.getServerBaseurl() + WebMvcLinkBuilder
+	String url = rtspSimpleServerApiWrapperServiceProperties.getServerBaseurl() + WebMvcLinkBuilder
 		.linkTo(WebMvcLinkBuilder.methodOn(V1Api.class).rtspsSessionsKick(id)).withSelfRel().toUri().getPath();
-	LOGGER.info("rtspsSessionsKick=" + url);
+	LOGGER.debug("rtspsSessionsKick=" + url);
 	return url;
     }
 
