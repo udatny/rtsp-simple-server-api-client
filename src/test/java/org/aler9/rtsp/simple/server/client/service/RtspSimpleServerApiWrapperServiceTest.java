@@ -14,12 +14,10 @@ import org.aler9.rtsp.simple.server.client.model.RTSPSession;
 import org.aler9.rtsp.simple.server.client.model.RtmpConnsList;
 import org.aler9.rtsp.simple.server.client.model.RtspSessionsList;
 import org.aler9.rtsp.simple.server.client.model.RtspsSessionsList;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@Disabled
 @SpringBootTest
 public class RtspSimpleServerApiWrapperServiceTest {
 
@@ -41,6 +39,7 @@ public class RtspSimpleServerApiWrapperServiceTest {
 	    pathConf.setRunOnDemandCloseAfter(null);
 
 	});
+	// TODO fix api
 	conf.setHlsSegmentDuration(null);
 	conf.setReadTimeout(null);
 	conf.setWriteTimeout(null);
@@ -81,20 +80,10 @@ public class RtspSimpleServerApiWrapperServiceTest {
 	pathConf = pathsList.getItems().get(pathChangeName).getConf();
 
 	PathConf newPathConf = pathConf;
-//	BeanUtilsBean notNull = new NullAwareBeanUtilsBean();
-//	try {
-//	    notNull.copyProperties(newPathConf, pathConf);
-//	} catch (IllegalAccessException e) {
-//	    // TODO Auto-generated catch block
-//	    e.printStackTrace();
-//	} catch (InvocationTargetException e) {
-//	    // TODO Auto-generated catch block
-//	    e.printStackTrace();
-//	}
 	newPathConf.setPublishUser(changedPublishUsername);
 	newPathConf.setPublishPass("pass");
-//	newPathConf.setReadIPs(new ArrayList<>());
-//	newPathConf.setPublishIPs(new ArrayList<>());
+
+	// TODO fix api
 	newPathConf.sourceOnDemandStartTimeout(null);
 	newPathConf.sourceOnDemandCloseAfter(null);
 	newPathConf.setRunOnDemandStartTimeout(null);
