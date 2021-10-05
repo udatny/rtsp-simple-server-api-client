@@ -26,3 +26,7 @@ then you may autowire the api wrapper service with
 
     @Autowired
     RtspSimpleServerApiWrapperService rtspSimpleServerApiWrapperService;
+
+# get maven dependency it via jitpack
+
+https://jitpack.io/#udatny/rtsp-simple-server-api-client/v0.2
