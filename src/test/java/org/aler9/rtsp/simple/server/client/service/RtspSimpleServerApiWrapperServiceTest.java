@@ -39,6 +39,7 @@ public class RtspSimpleServerApiWrapperServiceTest {
 	    pathConf.setRunOnDemandCloseAfter(null);
 
 	});
+	// TODO fix api
 	conf.setHlsSegmentDuration(null);
 	conf.setReadTimeout(null);
 	conf.setWriteTimeout(null);
@@ -79,20 +80,10 @@ public class RtspSimpleServerApiWrapperServiceTest {
 	pathConf = pathsList.getItems().get(pathChangeName).getConf();
 
 	PathConf newPathConf = pathConf;
-//	BeanUtilsBean notNull = new NullAwareBeanUtilsBean();
-//	try {
-//	    notNull.copyProperties(newPathConf, pathConf);
-//	} catch (IllegalAccessException e) {
-//	    // TODO Auto-generated catch block
-//	    e.printStackTrace();
-//	} catch (InvocationTargetException e) {
-//	    // TODO Auto-generated catch block
-//	    e.printStackTrace();
-//	}
 	newPathConf.setPublishUser(changedPublishUsername);
 	newPathConf.setPublishPass("pass");
-//	newPathConf.setReadIPs(new ArrayList<>());
-//	newPathConf.setPublishIPs(new ArrayList<>());
+
+	// TODO fix api
 	newPathConf.sourceOnDemandStartTimeout(null);
 	newPathConf.sourceOnDemandCloseAfter(null);
 	newPathConf.setRunOnDemandStartTimeout(null);
