@@ -14,12 +14,10 @@ import org.aler9.rtsp.simple.server.client.model.RTSPSession;
 import org.aler9.rtsp.simple.server.client.model.RtmpConnsList;
 import org.aler9.rtsp.simple.server.client.model.RtspSessionsList;
 import org.aler9.rtsp.simple.server.client.model.RtspsSessionsList;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@Disabled
 @SpringBootTest
 public class RtspSimpleServerApiWrapperServiceTest {
 
