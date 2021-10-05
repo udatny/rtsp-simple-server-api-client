@@ -1,6 +1,6 @@
 # Simple RTSP Server Java Client
 
-this code provides a base how you could access the simple rtsp server api via java.
+this code provides a base how you could access the [rtsp-simple-server](https://github.com/aler9/rtsp-simple-server) api via java / spring service.
 
 it also show some issues using the api. 
 
@@ -27,6 +27,6 @@ then you may autowire the api wrapper service with
     @Autowired
     RtspSimpleServerApiWrapperService rtspSimpleServerApiWrapperService;
 
-# get maven dependency it via jitpack
+# get maven dependency via jitpack
 
 https://jitpack.io/#udatny/rtsp-simple-server-api-client/v0.2
