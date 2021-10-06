@@ -1,0 +1,5 @@
+version: "3.9"
+services:
+  rtsp:
+    image: "aler9/rtsp-simple-server"
+    
