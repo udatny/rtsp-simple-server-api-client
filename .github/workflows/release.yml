@@ -23,7 +23,7 @@ jobs:
           - 1935:1935
           - 9997:9997
         env:
-          - RTSP_API:yes
+          RTSP_API: yes
         
           
     steps:
