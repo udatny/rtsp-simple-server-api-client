@@ -29,12 +29,14 @@ jobs:
     steps:
       - name: Checkout project
         uses: actions/checkout@v2
-#      - name: Build docker
-#        run: | 
-#          echo ---Building and starting up docker---
-#          ls
+      - name: Build docker
+        run: | 
+          echo ---Building and starting up docker---
+          curl -v http://localhost:9997/v1/paths/list
+          curl -v http://127.0.0.1:9997/v1/paths/list
+          curl -v http://127.0.0.1:1935/test
 #          docker-compose -f src/test/resources/docker-compose.test.yml -p testing up -d
-#          echo ---Containers up---        
+          echo ---Containers up---        
       - name: Cache local Maven repository
         uses: actions/cache@v2
         with:
