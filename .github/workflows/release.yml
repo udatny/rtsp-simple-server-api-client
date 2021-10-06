@@ -9,7 +9,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: alpine
+    container: alpine/git
     
      # Service containers to run with `runner-job`
     services:
