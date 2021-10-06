@@ -31,7 +31,7 @@ jobs:
     steps:
       - name: Checkout project
         uses: actions/checkout@v2
-      - name: Build docker
+#      - name: Build docker
 #        run: | 
 #          echo ---Building and starting up docker---
 #          curl -v http://rtsp:9997/v1/paths/list
