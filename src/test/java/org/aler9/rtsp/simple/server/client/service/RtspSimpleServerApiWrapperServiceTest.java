@@ -27,7 +27,7 @@ public class RtspSimpleServerApiWrapperServiceTest {
     @BeforeEach
     public void init() {
 	rtspSimpleServerApiWrapperService = new RtspSimpleServerApiWrapperService(
-		new RtspSimpleServerApiWrapperServiceProperties("http://135.181.196.169:30227"));
+		new RtspSimpleServerApiWrapperServiceProperties("http://localhost:9997"));
     }
 
     @Test
