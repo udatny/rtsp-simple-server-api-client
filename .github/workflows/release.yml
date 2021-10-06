@@ -26,6 +26,7 @@ jobs:
           - 9997:9997
         env:
           RTSP_API: yes
+          RTSP_APIADDRESS: :9997
         
           
     steps:
