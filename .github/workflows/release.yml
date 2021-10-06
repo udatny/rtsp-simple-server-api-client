@@ -16,7 +16,7 @@ jobs:
         run: | 
           echo ---Building and starting up docker---
           ls
-          docker-compose -f rtsp-simple-server-java-client/src/test/resources/docker-compose.test.yml -p testing up -d
+          docker-compose -f src/test/resources/docker-compose.test.yml -p testing up -d
           echo ---Containers up---        
       - name: Cache local Maven repository
         uses: actions/cache@v2
