@@ -1,7 +1,15 @@
 package org.aler9.rtsp.simple.server.client.service;
 
+import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.aler9.rtsp.simple.server.client.api.V1Api;
+import org.aler9.rtsp.simple.server.client.mixins.OneOfPathReadersItemsMixin;
+import org.aler9.rtsp.simple.server.client.mixins.OneOfPathSourceMixin;
 import org.aler9.rtsp.simple.server.client.model.Conf;
+import org.aler9.rtsp.simple.server.client.model.OneOfPathReadersItems;
+import org.aler9.rtsp.simple.server.client.model.OneOfPathSource;
 import org.aler9.rtsp.simple.server.client.model.PathConf;
 import org.aler9.rtsp.simple.server.client.model.PathsList;
 import org.aler9.rtsp.simple.server.client.model.RtmpConnsList;
@@ -9,20 +17,16 @@ import org.aler9.rtsp.simple.server.client.model.RtspSessionsList;
 import org.aler9.rtsp.simple.server.client.model.RtspsSessionsList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
-import lombok.RequiredArgsConstructor;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
-@Service
-@RequiredArgsConstructor
-@EnableConfigurationProperties(RtspSimpleServerApiWrapperServiceProperties.class)
 public class RtspSimpleServerApiWrapperService {
 
     final static Logger LOGGER = LoggerFactory.getLogger(RtspSimpleServerApiWrapperService.class);
@@ -43,6 +47,40 @@ public class RtspSimpleServerApiWrapperService {
     };
     private final ParameterizedTypeReference<RtspsSessionsList> typeRefRtspsSessionsListResponse = new ParameterizedTypeReference<RtspsSessionsList>() {
     };
+
+    public RtspSimpleServerApiWrapperService(
+	    RtspSimpleServerApiWrapperServiceProperties rtspSimpleServerApiWrapperServiceProperties) {
+	super();
+	this.rtspSimpleServerApiWrapperServiceProperties = rtspSimpleServerApiWrapperServiceProperties;
+	this.restTemplate = createRestTemplate();
+    }
+
+    private static final String dateFormat = "yyyy-MM-dd";
+    private static final String dateTimeFormat = "yyyy-MM-dd HH:mm:ss";
+
+    private RestTemplate createRestTemplate() {
+	RestTemplate restTemplate = new RestTemplate();
+	restTemplate.getMessageConverters().add(0, createMappingJacksonHttpMessageConverter());
+	return restTemplate;
+    }
+
+    private ObjectMapper createObjectMapper() {
+	ObjectMapper om = new ObjectMapper();
+
+	Map<Class<?>, Class<?>> mixins = new HashMap<>();
+	mixins.put(OneOfPathSource.class, OneOfPathSourceMixin.class);
+	mixins.put(OneOfPathReadersItems.class, OneOfPathReadersItemsMixin.class);
+
+	om.setDateFormat(new SimpleDateFormat(dateFormat));
+	om.setMixIns(mixins);
+	return om;
+    }
+
+    private MappingJackson2HttpMessageConverter createMappingJacksonHttpMessageConverter() {
+	MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
+	converter.setObjectMapper(createObjectMapper());
+	return converter;
+    }
 
     public Conf getConfig() {
 	ResponseEntity<Conf> response = restTemplate.exchange(getConfUrl(), HttpMethod.GET, new HttpEntity<>(null),

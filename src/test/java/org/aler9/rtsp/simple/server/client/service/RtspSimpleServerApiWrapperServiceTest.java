@@ -14,15 +14,20 @@ import org.aler9.rtsp.simple.server.client.model.RTSPSession;
 import org.aler9.rtsp.simple.server.client.model.RtmpConnsList;
 import org.aler9.rtsp.simple.server.client.model.RtspSessionsList;
 import org.aler9.rtsp.simple.server.client.model.RtspsSessionsList;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+//@SpringBootTest
 public class RtspSimpleServerApiWrapperServiceTest {
 
-    @Autowired
+    // @Autowired
     RtspSimpleServerApiWrapperService rtspSimpleServerApiWrapperService;
+
+    @BeforeEach
+    public void init() {
+	rtspSimpleServerApiWrapperService = new RtspSimpleServerApiWrapperService(
+		new RtspSimpleServerApiWrapperServiceProperties("http://135.181.196.169:30227"));
+    }
 
     @Test
     void testGetConfig() {

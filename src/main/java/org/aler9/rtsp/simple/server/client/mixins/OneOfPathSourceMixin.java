@@ -1,4 +1,4 @@
-package org.aler9.rtsp.simple.server.client.conf;
+package org.aler9.rtsp.simple.server.client.mixins;
 
 import org.aler9.rtsp.simple.server.client.model.PathSourceRTMPConn;
 import org.aler9.rtsp.simple.server.client.model.PathSourceRTMPSource;
