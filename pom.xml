@@ -9,8 +9,8 @@
 	<name>rtsp-simple-server-java-client</name>
 	<packaging>jar</packaging>
 	<properties>
-		<okhttp.version>4.9.1</okhttp.version>
 		<maven.compiler.release>8</maven.compiler.release>
+		<git.repository>udatny/rtsp-simple-server-api-client</git.repository>
 	</properties>
 	<dependencies>
 		<dependency>
