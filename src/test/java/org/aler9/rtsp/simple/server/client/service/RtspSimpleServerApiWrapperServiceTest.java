@@ -15,6 +15,7 @@ import org.aler9.rtsp.simple.server.client.model.RtmpConnsList;
 import org.aler9.rtsp.simple.server.client.model.RtspSessionsList;
 import org.aler9.rtsp.simple.server.client.model.RtspsSessionsList;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 //@SpringBootTest
@@ -123,6 +124,7 @@ public class RtspSimpleServerApiWrapperServiceTest {
 	rtspSimpleServerApiWrapperService.getRtspSessionsList();
     }
 
+    @Disabled
     @Test
     void testGetRtspsSessionsList() {
 	rtspSimpleServerApiWrapperService.getRtspsSessionsList();
@@ -149,6 +151,7 @@ public class RtspSimpleServerApiWrapperServiceTest {
 
     }
 
+    @Disabled
     @Test
     void testKickRtspsConn() {
 	RtspsSessionsList session = rtspSimpleServerApiWrapperService.getRtspsSessionsList();
