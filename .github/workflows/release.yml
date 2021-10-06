@@ -35,7 +35,6 @@ jobs:
           curl -v http://localhost:9997/v1/paths/list
           curl -v http://127.0.0.1:9997/v1/paths/list
           curl -v http://127.0.0.1:1935/test
-#          docker-compose -f src/test/resources/docker-compose.test.yml -p testing up -d
           echo ---Containers up---        
       - name: Cache local Maven repository
         uses: actions/cache@v2
