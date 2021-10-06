@@ -34,7 +34,7 @@ jobs:
       - name: Build docker
         run: | 
           echo ---Building and starting up docker---
-#          curl -v http://localhost:9997/v1/paths/list
+          curl -v http://rtsp:9997/v1/paths/list
 #          curl -v http://127.0.0.1:9997/v1/paths/list
 #          curl -v http://127.0.0.1:1935/test
 #          echo ---Containers up---        
