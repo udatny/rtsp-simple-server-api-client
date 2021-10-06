@@ -9,15 +9,32 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    # Service containers to run with `runner-job`
+    services:
+      # Label used to access the service container
+      rtsp:
+        # Docker Hub image
+        image: aler9/rtsp-simple-server
+        #
+        ports:
+          # Opens tcp port 6379 on the host and service container
+          - 6379:6379    
+          - 8554:8554
+          - 1935:1935
+          - 9997:9997
+        env:
+          - RTSP_API:yes
+        
+          
     steps:
       - name: Checkout project
         uses: actions/checkout@v2
-      - name: Build docker
-        run: | 
-          echo ---Building and starting up docker---
-          ls
-          docker-compose -f src/test/resources/docker-compose.test.yml -p testing up -d
-          echo ---Containers up---        
+#      - name: Build docker
+#        run: | 
+#          echo ---Building and starting up docker---
+#          ls
+#          docker-compose -f src/test/resources/docker-compose.test.yml -p testing up -d
+#          echo ---Containers up---        
       - name: Cache local Maven repository
         uses: actions/cache@v2
         with:
