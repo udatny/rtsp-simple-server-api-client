@@ -144,7 +144,7 @@
 							<goal>generate</goal>
 						</goals>
 						<configuration>
-							<inputSpec>${project.basedir}/api/rtsp-simple-server-openapi-spec-0.17.3.yaml</inputSpec>
+							<inputSpec>${project.basedir}/api/rtsp-simple-server-openapi-spec-0.17.6.yaml</inputSpec>
 							<language>spring</language>
 							<modelPackage>org.aler9.rtsp.simple.server.client.model</modelPackage>
 							<apiPackage>org.aler9.rtsp.simple.server.client.api</apiPackage>
