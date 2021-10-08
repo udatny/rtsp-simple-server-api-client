@@ -44,10 +44,10 @@ public class RtspSimpleServerApiWrapperServiceTest {
 
 	});
 	// TODO fix api
-	conf.setHlsSegmentDuration(null);
-	conf.setReadTimeout(null);
-	conf.setWriteTimeout(null);
-	conf.setRtspDisable(false);
+//	conf.setHlsSegmentDuration(null);
+//	conf.setReadTimeout(null);
+//	conf.setWriteTimeout(null);
+//	conf.setRtspDisable(false);
 	rtspSimpleServerApiWrapperService.setConfig(conf);
     }
 
@@ -88,10 +88,10 @@ public class RtspSimpleServerApiWrapperServiceTest {
 	newPathConf.setPublishPass("pass");
 
 	// TODO fix api
-	newPathConf.sourceOnDemandStartTimeout(null);
-	newPathConf.sourceOnDemandCloseAfter(null);
-	newPathConf.setRunOnDemandStartTimeout(null);
-	newPathConf.setRunOnDemandCloseAfter(null);
+//	newPathConf.sourceOnDemandStartTimeout(null);
+//	newPathConf.sourceOnDemandCloseAfter(null);
+//	newPathConf.setRunOnDemandStartTimeout(null);
+//	newPathConf.setRunOnDemandCloseAfter(null);
 
 	rtspSimpleServerApiWrapperService.changePathConfig(pathChangeName, newPathConf);
 
