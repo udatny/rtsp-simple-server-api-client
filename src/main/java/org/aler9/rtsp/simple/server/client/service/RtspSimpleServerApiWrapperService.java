@@ -12,9 +12,9 @@ import org.aler9.rtsp.simple.server.client.model.OneOfPathReadersItems;
 import org.aler9.rtsp.simple.server.client.model.OneOfPathSource;
 import org.aler9.rtsp.simple.server.client.model.PathConf;
 import org.aler9.rtsp.simple.server.client.model.PathsList;
-import org.aler9.rtsp.simple.server.client.model.RtmpConnsList;
-import org.aler9.rtsp.simple.server.client.model.RtspSessionsList;
-import org.aler9.rtsp.simple.server.client.model.RtspsSessionsList;
+import org.aler9.rtsp.simple.server.client.model.RTMPConnsList;
+import org.aler9.rtsp.simple.server.client.model.RTSPSSessionsList;
+import org.aler9.rtsp.simple.server.client.model.RTSPSessionsList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.ParameterizedTypeReference;
@@ -41,11 +41,11 @@ public class RtspSimpleServerApiWrapperService {
     };
     private final ParameterizedTypeReference<PathsList> typeRefPathListResponse = new ParameterizedTypeReference<PathsList>() {
     };
-    private final ParameterizedTypeReference<RtmpConnsList> typeRefRtmpConnsListResponse = new ParameterizedTypeReference<RtmpConnsList>() {
+    private final ParameterizedTypeReference<RTMPConnsList> typeRefRtmpConnsListResponse = new ParameterizedTypeReference<RTMPConnsList>() {
     };
-    private final ParameterizedTypeReference<RtspSessionsList> typeRefRtspSessionsListResponse = new ParameterizedTypeReference<RtspSessionsList>() {
+    private final ParameterizedTypeReference<RTSPSessionsList> typeRefRtspSessionsListResponse = new ParameterizedTypeReference<RTSPSessionsList>() {
     };
-    private final ParameterizedTypeReference<RtspsSessionsList> typeRefRtspsSessionsListResponse = new ParameterizedTypeReference<RtspsSessionsList>() {
+    private final ParameterizedTypeReference<RTSPSSessionsList> typeRefRtspsSessionsListResponse = new ParameterizedTypeReference<RTSPSSessionsList>() {
     };
 
     public RtspSimpleServerApiWrapperService(
@@ -118,20 +118,20 @@ public class RtspSimpleServerApiWrapperService {
 	return response.getBody();
     }
 
-    public RtmpConnsList getRtmpConnsList() {
-	ResponseEntity<RtmpConnsList> response = restTemplate.exchange(getRtmpConnsListUrl(), HttpMethod.GET,
+    public RTMPConnsList getRtmpConnsList() {
+	ResponseEntity<RTMPConnsList> response = restTemplate.exchange(getRtmpConnsListUrl(), HttpMethod.GET,
 		new HttpEntity<>(null), typeRefRtmpConnsListResponse, "");
 	return response.getBody();
     }
 
-    public RtspSessionsList getRtspSessionsList() {
-	ResponseEntity<RtspSessionsList> response = restTemplate.exchange(getRtspSessionsListUrl(), HttpMethod.GET,
+    public RTSPSessionsList getRtspSessionsList() {
+	ResponseEntity<RTSPSessionsList> response = restTemplate.exchange(getRtspSessionsListUrl(), HttpMethod.GET,
 		new HttpEntity<>(null), typeRefRtspSessionsListResponse, "");
 	return response.getBody();
     }
 
-    public RtspsSessionsList getRtspsSessionsList() {
-	ResponseEntity<RtspsSessionsList> response = restTemplate.exchange(getRtspsSessionsListUrl(), HttpMethod.GET,
+    public RTSPSSessionsList getRtspsSessionsList() {
+	ResponseEntity<RTSPSSessionsList> response = restTemplate.exchange(getRtspsSessionsListUrl(), HttpMethod.GET,
 		new HttpEntity<>(null), typeRefRtspsSessionsListResponse, "");
 	return response.getBody();
     }

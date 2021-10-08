@@ -9,19 +9,17 @@ import org.aler9.rtsp.simple.server.client.model.Conf;
 import org.aler9.rtsp.simple.server.client.model.PathConf;
 import org.aler9.rtsp.simple.server.client.model.PathsList;
 import org.aler9.rtsp.simple.server.client.model.RTMPConn;
+import org.aler9.rtsp.simple.server.client.model.RTMPConnsList;
 import org.aler9.rtsp.simple.server.client.model.RTSPSSession;
+import org.aler9.rtsp.simple.server.client.model.RTSPSSessionsList;
 import org.aler9.rtsp.simple.server.client.model.RTSPSession;
-import org.aler9.rtsp.simple.server.client.model.RtmpConnsList;
-import org.aler9.rtsp.simple.server.client.model.RtspSessionsList;
-import org.aler9.rtsp.simple.server.client.model.RtspsSessionsList;
+import org.aler9.rtsp.simple.server.client.model.RTSPSessionsList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-//@SpringBootTest
 public class RtspSimpleServerApiWrapperServiceTest {
 
-    // @Autowired
     RtspSimpleServerApiWrapperService rtspSimpleServerApiWrapperService;
 
     @BeforeEach
@@ -132,7 +130,7 @@ public class RtspSimpleServerApiWrapperServiceTest {
 
     @Test
     void testKickRtmpConn() {
-	RtmpConnsList session = rtspSimpleServerApiWrapperService.getRtmpConnsList();
+	RTMPConnsList session = rtspSimpleServerApiWrapperService.getRtmpConnsList();
 	Optional<Entry<String, RTMPConn>> firstOptional = session.getItems().entrySet().stream().findFirst();
 
 	if (firstOptional.isPresent()) {
@@ -142,7 +140,7 @@ public class RtspSimpleServerApiWrapperServiceTest {
 
     @Test
     void testKickRtspConn() {
-	RtspSessionsList session = rtspSimpleServerApiWrapperService.getRtspSessionsList();
+	RTSPSessionsList session = rtspSimpleServerApiWrapperService.getRtspSessionsList();
 	Optional<Entry<String, RTSPSession>> firstOptional = session.getItems().entrySet().stream().findFirst();
 
 	if (firstOptional.isPresent()) {
@@ -154,7 +152,7 @@ public class RtspSimpleServerApiWrapperServiceTest {
     @Disabled
     @Test
     void testKickRtspsConn() {
-	RtspsSessionsList session = rtspSimpleServerApiWrapperService.getRtspsSessionsList();
+	RTSPSSessionsList session = rtspSimpleServerApiWrapperService.getRtspsSessionsList();
 	Optional<Entry<String, RTSPSSession>> firstOptional = session.getItems().entrySet().stream().findFirst();
 
 	if (firstOptional.isPresent()) {
