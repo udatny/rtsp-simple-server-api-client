@@ -1,10 +1,9 @@
-name: Run Integration Tests
+name: Run develop Integration Tests
 
 on:
   push:
     branches:
       - develop
-      - master
 
 
 jobs:
@@ -32,6 +31,8 @@ jobs:
     steps:
       - name: Checkout project
         uses: actions/checkout@v2
+        with: 
+          ref: 'develop'
       - name: Cache local Maven repository
         uses: actions/cache@v2
         with:
