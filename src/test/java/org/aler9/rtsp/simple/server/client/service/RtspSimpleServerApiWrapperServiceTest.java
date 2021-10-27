@@ -15,6 +15,7 @@ import org.aler9.rtsp.simple.server.client.model.RTSPSSessionsList;
 import org.aler9.rtsp.simple.server.client.model.RTSPSession;
 import org.aler9.rtsp.simple.server.client.model.RTSPSessionsList;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 public class RtspSimpleServerApiWrapperServiceTest {
@@ -25,6 +26,25 @@ public class RtspSimpleServerApiWrapperServiceTest {
     public void init() {
 	rtspSimpleServerApiWrapperService = new RtspSimpleServerApiWrapperService(
 		new RtspSimpleServerApiWrapperServiceProperties("http://localhost:9997"));
+    }
+
+    @Test
+    public void testWrongHost() {
+	rtspSimpleServerApiWrapperService = new RtspSimpleServerApiWrapperService(
+		new RtspSimpleServerApiWrapperServiceProperties("http://localhost:9293"));
+	testGetPathsList();
+    }
+
+    @Disabled
+    @Test
+    public void testWrongAction() {
+	rtspSimpleServerApiWrapperService = new RtspSimpleServerApiWrapperService(
+		new RtspSimpleServerApiWrapperServiceProperties("http://localhost:9293"));
+	PathsList pathsList = rtspSimpleServerApiWrapperService.getPathsList();
+
+	rtspSimpleServerApiWrapperService = new RtspSimpleServerApiWrapperService(
+		new RtspSimpleServerApiWrapperServiceProperties("http://localhost:8080"));
+	pathsList = rtspSimpleServerApiWrapperService.getPathsList();
     }
 
     @Test
