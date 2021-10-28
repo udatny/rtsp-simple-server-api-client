@@ -61,3 +61,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
+      - name: Release Github artifact
+        uses: ncipollo/release-action@v1
+        with:
+          tag: ${{ steps.project.outputs.version }}
