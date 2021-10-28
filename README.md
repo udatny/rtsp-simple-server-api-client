@@ -1,6 +1,6 @@
 # Simple RTSP Server Java Client
 
-this code provides a base how you could access the [rtsp-simple-server](https://github.com/aler9/rtsp-simple-server) api via java.
+ this code provides a base how you could access the [rtsp-simple-server](https://github.com/aler9/rtsp-simple-server) api via java.
 
 ## how to run
 `mvn generate-sources` to generate sources from the api doc spec
