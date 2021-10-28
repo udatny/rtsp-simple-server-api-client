@@ -1,6 +1,8 @@
-package org.aler9.rtsp.simple.server.client.service;
+package org.aler9.rtsp.simple.server.client.example;
 
 import org.aler9.rtsp.simple.server.client.model.PathsList;
+import org.aler9.rtsp.simple.server.client.service.RtspSimpleServerApiWrapperService;
+import org.aler9.rtsp.simple.server.client.service.RtspSimpleServerApiWrapperServiceProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
