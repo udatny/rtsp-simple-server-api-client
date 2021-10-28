@@ -1,7 +1,7 @@
 name: Release From Tag
 
 on:
-  push:
+  create:
     tags:
       - '*'
 
