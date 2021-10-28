@@ -18,6 +18,7 @@ see the Example.java
 		new RtspSimpleServerApiWrapperServiceProperties("http://localhost:9997"));
 
 	PathsList pathsList = rtspSimpleServerApiWrapperService.getPathsList();
+	// output configured paths
 	pathsList.getItems().entrySet().forEach(pathEntry -> {
 	    LOGGER.info(pathEntry.getKey() + ":" + pathEntry.getValue());
 	});
