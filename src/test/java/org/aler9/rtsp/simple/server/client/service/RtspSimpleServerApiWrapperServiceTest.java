@@ -34,6 +34,7 @@ public class RtspSimpleServerApiWrapperServiceTest {
 		new RtspSimpleServerApiWrapperServiceProperties("http://localhost:9293"));
 	try {
 	    PathsList pathsList = rtspSimpleServerApiWrapperService.getPathsList();
+	    throw new AssertionError("calling non existing api endpoint address must fail");
 	} catch (RtspSimpleServerApiException e) {
 
 	}
@@ -163,11 +164,19 @@ public class RtspSimpleServerApiWrapperServiceTest {
 
     @Test
     void testKickRtspsConn() {
-	RTSPSSessionsList session = rtspSimpleServerApiWrapperService.getRtspsSessionsList();
-	Optional<Entry<String, RTSPSSession>> firstOptional = session.getItems().entrySet().stream().findFirst();
+	try {
+	    RTSPSSessionsList session = rtspSimpleServerApiWrapperService.getRtspsSessionsList();
 
-	if (firstOptional.isPresent()) {
-	    rtspSimpleServerApiWrapperService.kickRtspsConn(firstOptional.get().getKey());
+	    Optional<Entry<String, RTSPSSession>> firstOptional = session.getItems().entrySet().stream().findFirst();
+
+	    if (firstOptional.isPresent()) {
+		rtspSimpleServerApiWrapperService.kickRtspsConn(firstOptional.get().getKey());
+	    }
+
+	    throw new AssertionError("must fail since rtsps is not set up in test server");
+
+	} catch (RtspSimpleServerApiException e) {
+
 	}
 
     }
