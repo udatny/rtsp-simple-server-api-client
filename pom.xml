@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.aler9.rtsp.simple.server</groupId>
 	<artifactId>rtsp-simple-server-java-client</artifactId>
-	<version>0.0.21-SNAPSHOT</version>
+	<version>0.0.21</version>
 	<name>rtsp-simple-server-java-client</name>
 	<packaging>jar</packaging>
 	<properties>
@@ -97,7 +97,7 @@
 
 	<scm>
 		<developerConnection>scm:git:https://github.com/${git.repository}.git</developerConnection>
-	  <tag>HEAD</tag>
+	  <tag>0.0.21</tag>
   </scm>
 	
 	<distributionManagement>
