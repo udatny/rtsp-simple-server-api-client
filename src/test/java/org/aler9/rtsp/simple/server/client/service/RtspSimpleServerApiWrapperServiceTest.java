@@ -32,7 +32,11 @@ public class RtspSimpleServerApiWrapperServiceTest {
     public void testWrongHost() {
 	rtspSimpleServerApiWrapperService = new RtspSimpleServerApiWrapperService(
 		new RtspSimpleServerApiWrapperServiceProperties("http://localhost:9293"));
-	testGetPathsList();
+	try {
+	    PathsList pathsList = rtspSimpleServerApiWrapperService.getPathsList();
+	} catch (RtspSimpleServerApiException e) {
+
+	}
     }
 
     @Disabled
