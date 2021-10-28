@@ -46,11 +46,20 @@
 		    <artifactId>log4j-core</artifactId>
 		    <version>2.13.3</version>
 		</dependency>
+		<!-- 
 		<dependency>
 		    <groupId>org.apache.logging.log4j</groupId>
 		    <artifactId>log4j-slf4j-impl</artifactId>
 		    <version>2.13.3</version>
 		</dependency>		
+		 -->
+
+	<dependency>
+		<groupId>ch.qos.logback</groupId>
+		<artifactId>logback-classic</artifactId>
+		<version>1.2.6</version>
+	</dependency>
+			
 		<dependency>
 			<groupId>javax.validation</groupId>
 			<artifactId>validation-api</artifactId>
@@ -114,6 +123,14 @@
 					<target>1.8</target>
 				</configuration>
 			</plugin>
+                        <plugin>
+                          <groupId>org.apache.maven.plugins</groupId>
+                          <artifactId>maven-release-plugin</artifactId>
+                          <version>3.0.0-M4</version>
+                          <configuration>
+                            <tagNameFormat>@{project.version}</tagNameFormat>
+                          </configuration>
+                        </plugin>			
 			<plugin>
 				<groupId>io.swagger.codegen.v3</groupId>
 				<artifactId>swagger-codegen-maven-plugin</artifactId>

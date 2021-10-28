@@ -1,0 +1,53 @@
+name: Run develop Integration Tests
+
+on:
+  push:
+    branches:
+      - develop
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+     # Service containers to run with `runner-job`
+    services:
+      # Label used to access the service container
+      rtsp:
+        # Docker Hub image
+        image: aler9/rtsp-simple-server:v0.17.7
+        #
+        ports:
+          # Opens tcp port 6379 on the host and service container
+          - 6379:6379    
+          - 8554:8554
+          - 1935:1935
+          - 9997:9997
+        env:
+          RTSP_API: yes
+          RTSP_APIADDRESS: :9997
+        
+          
+    steps:
+      - name: Checkout project
+        uses: actions/checkout@v2
+        with: 
+          ref: 'develop'
+      - name: Cache local Maven repository
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-maven-
+      - name: Setup Java JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+          server-id: github
+      - name: Configure Git user
+        run: |
+          git config user.email "actions@github.com"
+          git config user.name "GitHub Actions"
+      - name: Run Tests
+        run: ./mvnw test

@@ -29,6 +29,30 @@ public class RtspSimpleServerApiWrapperServiceTest {
     }
 
     @Test
+    public void testWrongHost() {
+	rtspSimpleServerApiWrapperService = new RtspSimpleServerApiWrapperService(
+		new RtspSimpleServerApiWrapperServiceProperties("http://localhost:9293"));
+	try {
+	    PathsList pathsList = rtspSimpleServerApiWrapperService.getPathsList();
+	    throw new AssertionError("calling non existing api endpoint address must fail");
+	} catch (RtspSimpleServerApiException e) {
+
+	}
+    }
+
+    @Disabled
+    @Test
+    public void testWrongAction() {
+	rtspSimpleServerApiWrapperService = new RtspSimpleServerApiWrapperService(
+		new RtspSimpleServerApiWrapperServiceProperties("http://localhost:9293"));
+	PathsList pathsList = rtspSimpleServerApiWrapperService.getPathsList();
+
+	rtspSimpleServerApiWrapperService = new RtspSimpleServerApiWrapperService(
+		new RtspSimpleServerApiWrapperServiceProperties("http://localhost:8080"));
+	pathsList = rtspSimpleServerApiWrapperService.getPathsList();
+    }
+
+    @Test
     void testGetConfig() {
 	Conf conf = rtspSimpleServerApiWrapperService.getConfig();
     }
@@ -44,10 +68,6 @@ public class RtspSimpleServerApiWrapperServiceTest {
 
 	});
 	// TODO fix api
-	conf.setHlsSegmentDuration(null);
-	conf.setReadTimeout(null);
-	conf.setWriteTimeout(null);
-	conf.setRtspDisable(false);
 	rtspSimpleServerApiWrapperService.setConfig(conf);
     }
 
@@ -87,12 +107,6 @@ public class RtspSimpleServerApiWrapperServiceTest {
 	newPathConf.setPublishUser(changedPublishUsername);
 	newPathConf.setPublishPass("pass");
 
-	// TODO fix api
-	newPathConf.sourceOnDemandStartTimeout(null);
-	newPathConf.sourceOnDemandCloseAfter(null);
-	newPathConf.setRunOnDemandStartTimeout(null);
-	newPathConf.setRunOnDemandCloseAfter(null);
-
 	rtspSimpleServerApiWrapperService.changePathConfig(pathChangeName, newPathConf);
 
 	pathsList = rtspSimpleServerApiWrapperService.getPathsList();
@@ -122,10 +136,16 @@ public class RtspSimpleServerApiWrapperServiceTest {
 	rtspSimpleServerApiWrapperService.getRtspSessionsList();
     }
 
-    @Disabled
     @Test
     void testGetRtspsSessionsList() {
-	rtspSimpleServerApiWrapperService.getRtspsSessionsList();
+	try {
+	    rtspSimpleServerApiWrapperService.getRtspsSessionsList();
+	    throw new AssertionError("must fail since rtsps is not set up in test server");
+
+	} catch (RtspSimpleServerApiException e) {
+
+	}
+
     }
 
     @Test
@@ -149,14 +169,21 @@ public class RtspSimpleServerApiWrapperServiceTest {
 
     }
 
-    @Disabled
     @Test
     void testKickRtspsConn() {
-	RTSPSSessionsList session = rtspSimpleServerApiWrapperService.getRtspsSessionsList();
-	Optional<Entry<String, RTSPSSession>> firstOptional = session.getItems().entrySet().stream().findFirst();
+	try {
+	    RTSPSSessionsList session = rtspSimpleServerApiWrapperService.getRtspsSessionsList();
 
-	if (firstOptional.isPresent()) {
-	    rtspSimpleServerApiWrapperService.kickRtspsConn(firstOptional.get().getKey());
+	    Optional<Entry<String, RTSPSSession>> firstOptional = session.getItems().entrySet().stream().findFirst();
+
+	    if (firstOptional.isPresent()) {
+		rtspSimpleServerApiWrapperService.kickRtspsConn(firstOptional.get().getKey());
+	    }
+
+	    throw new AssertionError("must fail since rtsps is not set up in test server");
+
+	} catch (RtspSimpleServerApiException e) {
+
 	}
 
     }

@@ -23,6 +23,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -56,10 +57,10 @@ public class RtspSimpleServerApiWrapperService {
     }
 
     private static final String dateFormat = "yyyy-MM-dd";
-    private static final String dateTimeFormat = "yyyy-MM-dd HH:mm:ss";
 
     private RestTemplate createRestTemplate() {
 	RestTemplate restTemplate = new RestTemplate();
+	restTemplate.setErrorHandler(new RtspSimpleServerApiHttpErrorHandler());
 	restTemplate.getMessageConverters().add(0, createMappingJacksonHttpMessageConverter());
 	return restTemplate;
     }
@@ -83,75 +84,124 @@ public class RtspSimpleServerApiWrapperService {
     }
 
     public Conf getConfig() {
-	ResponseEntity<Conf> response = restTemplate.exchange(getConfUrl(), HttpMethod.GET, new HttpEntity<>(null),
-		typeRefConfResponse, "");
-	return response.getBody();
+	try {
+	    ResponseEntity<Conf> response = restTemplate.exchange(getConfUrl(), HttpMethod.GET, new HttpEntity<>(null),
+		    typeRefConfResponse, "");
+	    return response.getBody();
+	} catch (RestClientException restClientException) {
+	    throw extractAndRethrowException(restClientException);
+	}
     }
 
     public Void setConfig(Conf conf) {
-	ResponseEntity<Void> response = restTemplate.exchange(setConfUrl(), HttpMethod.POST, new HttpEntity<>(conf),
-		typeRefVoidResponse, conf);
-	return response.getBody();
+	try {
+	    ResponseEntity<Void> response = restTemplate.exchange(setConfUrl(), HttpMethod.POST, new HttpEntity<>(conf),
+		    typeRefVoidResponse, conf);
+	    return response.getBody();
+	} catch (RestClientException restClientException) {
+	    throw extractAndRethrowException(restClientException);
+	}
     }
 
     public PathsList getPathsList() {
-	ResponseEntity<PathsList> response = restTemplate.exchange(getPathsListUrl(), HttpMethod.GET,
-		new HttpEntity<>(null), typeRefPathListResponse, "");
-	return response.getBody();
+	try {
+	    ResponseEntity<PathsList> response = restTemplate.exchange(getPathsListUrl(), HttpMethod.GET,
+		    new HttpEntity<>(null), typeRefPathListResponse, "");
+	    return response.getBody();
+	} catch (RestClientException restClientException) {
+	    throw extractAndRethrowException(restClientException);
+	}
     }
 
     public Void addPathConfig(String pathName, PathConf pathConfig) {
-	ResponseEntity<Void> response = restTemplate.exchange(addPathConfigUrl(pathName), HttpMethod.POST,
-		new HttpEntity<>(pathConfig), typeRefVoidResponse, pathConfig);
-	return response.getBody();
+	try {
+	    ResponseEntity<Void> response = restTemplate.exchange(addPathConfigUrl(pathName), HttpMethod.POST,
+		    new HttpEntity<>(pathConfig), typeRefVoidResponse, pathConfig);
+	    return response.getBody();
+	} catch (RestClientException restClientException) {
+	    throw extractAndRethrowException(restClientException);
+	}
+
     }
 
     public Void changePathConfig(String pathName, PathConf pathConfig) {
-	ResponseEntity<Void> response = restTemplate.exchange(editPathConfigUrl(pathName), HttpMethod.POST,
-		new HttpEntity<>(pathConfig), typeRefVoidResponse, pathConfig);
-	return response.getBody();
+	try {
+	    ResponseEntity<Void> response = restTemplate.exchange(editPathConfigUrl(pathName), HttpMethod.POST,
+		    new HttpEntity<>(pathConfig), typeRefVoidResponse, pathConfig);
+	    return response.getBody();
+	} catch (RestClientException restClientException) {
+	    throw extractAndRethrowException(restClientException);
+	}
     }
 
     public Void removePathConfig(String pathName) {
-	ResponseEntity<Void> response = restTemplate.exchange(removePathConfigUrl(pathName), HttpMethod.POST,
-		new HttpEntity<>(null), typeRefVoidResponse);
-	return response.getBody();
+	try {
+	    ResponseEntity<Void> response = restTemplate.exchange(removePathConfigUrl(pathName), HttpMethod.POST,
+		    new HttpEntity<>(null), typeRefVoidResponse);
+	    return response.getBody();
+	} catch (RestClientException restClientException) {
+	    throw extractAndRethrowException(restClientException);
+	}
     }
 
     public RTMPConnsList getRtmpConnsList() {
-	ResponseEntity<RTMPConnsList> response = restTemplate.exchange(getRtmpConnsListUrl(), HttpMethod.GET,
-		new HttpEntity<>(null), typeRefRtmpConnsListResponse, "");
-	return response.getBody();
+	try {
+	    ResponseEntity<RTMPConnsList> response = restTemplate.exchange(getRtmpConnsListUrl(), HttpMethod.GET,
+		    new HttpEntity<>(null), typeRefRtmpConnsListResponse, "");
+	    return response.getBody();
+	} catch (RestClientException restClientException) {
+	    throw extractAndRethrowException(restClientException);
+	}
     }
 
     public RTSPSessionsList getRtspSessionsList() {
-	ResponseEntity<RTSPSessionsList> response = restTemplate.exchange(getRtspSessionsListUrl(), HttpMethod.GET,
-		new HttpEntity<>(null), typeRefRtspSessionsListResponse, "");
-	return response.getBody();
+	try {
+	    ResponseEntity<RTSPSessionsList> response = restTemplate.exchange(getRtspSessionsListUrl(), HttpMethod.GET,
+		    new HttpEntity<>(null), typeRefRtspSessionsListResponse, "");
+	    return response.getBody();
+	} catch (RestClientException restClientException) {
+	    throw extractAndRethrowException(restClientException);
+	}
     }
 
     public RTSPSSessionsList getRtspsSessionsList() {
-	ResponseEntity<RTSPSSessionsList> response = restTemplate.exchange(getRtspsSessionsListUrl(), HttpMethod.GET,
-		new HttpEntity<>(null), typeRefRtspsSessionsListResponse, "");
-	return response.getBody();
+	try {
+	    ResponseEntity<RTSPSSessionsList> response = restTemplate.exchange(getRtspsSessionsListUrl(),
+		    HttpMethod.GET, new HttpEntity<>(null), typeRefRtspsSessionsListResponse, "");
+	    return response.getBody();
+	} catch (RestClientException restClientException) {
+	    throw extractAndRethrowException(restClientException);
+	}
     }
 
     public Void kickRtmpConn(String id) {
-	ResponseEntity<Void> response = restTemplate.exchange(kickRtmpConnUrl(id), HttpMethod.POST,
-		new HttpEntity<>(null), typeRefVoidResponse);
-	return response.getBody();
+	try {
+	    ResponseEntity<Void> response = restTemplate.exchange(kickRtmpConnUrl(id), HttpMethod.POST,
+		    new HttpEntity<>(null), typeRefVoidResponse);
+	    return response.getBody();
+	} catch (RestClientException restClientException) {
+	    throw extractAndRethrowException(restClientException);
+	}
     }
 
     public Void kickRtspConn(String id) {
-	ResponseEntity<Void> response = restTemplate.exchange(kickRtspConnUrl(id), HttpMethod.POST,
-		new HttpEntity<>(null), typeRefVoidResponse);
-	return response.getBody();
+	try {
+	    ResponseEntity<Void> response = restTemplate.exchange(kickRtspConnUrl(id), HttpMethod.POST,
+		    new HttpEntity<>(null), typeRefVoidResponse);
+	    return response.getBody();
+	} catch (RestClientException restClientException) {
+	    throw extractAndRethrowException(restClientException);
+	}
     }
 
     public Void kickRtspsConn(String id) {
-	ResponseEntity<Void> response = restTemplate.exchange(kickRtspsConnUrl(id), HttpMethod.POST,
-		new HttpEntity<>(null), typeRefVoidResponse);
-	return response.getBody();
+	try {
+	    ResponseEntity<Void> response = restTemplate.exchange(kickRtspsConnUrl(id), HttpMethod.POST,
+		    new HttpEntity<>(null), typeRefVoidResponse);
+	    return response.getBody();
+	} catch (RestClientException restClientException) {
+	    throw extractAndRethrowException(restClientException);
+	}
     }
 
     private String getConfUrl() {
@@ -239,6 +289,14 @@ public class RtspSimpleServerApiWrapperService {
 		.linkTo(WebMvcLinkBuilder.methodOn(V1Api.class).rtspsSessionsKick(id)).withSelfRel().toUri().getPath();
 	LOGGER.debug("rtspsSessionsKick=" + url);
 	return url;
+    }
+
+    private RtspSimpleServerApiException extractAndRethrowException(RestClientException restClientException) {
+	if (restClientException.contains(RtspSimpleServerApiException.class)) {
+	    throw (RtspSimpleServerApiException) restClientException.getMostSpecificCause();
+	} else {
+	    throw new RtspSimpleServerApiException(null, restClientException.getMessage());
+	}
     }
 
 }
