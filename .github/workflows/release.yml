@@ -61,12 +61,19 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Extract Maven project version1
+        run: echo ::set-output name=version::$(./mvnw help:evaluate -Dexpression=project.version -q -DforceStdout | cut -d- -f1)
+        id: project1
+ 
       - name: Extract Maven project version
         run: echo ::set-output name=version::$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
         id: project
 
       - name: Show extracted Maven project version
         run: echo ${{ steps.project.outputs.version }}
+        
+      - name: Show extracted Maven project1 version
+        run: echo ${{ steps.project1.outputs.version }}
         
       - name: Publish JAR perform
         run: ./mvnw -B release:perform
