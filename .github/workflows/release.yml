@@ -55,14 +55,21 @@ jobs:
         run: |
           git config user.email "actions@github.com"
           git config user.name "GitHub Actions"
-      - name: Publish JAR
-        run: ./mvnw -B release:prepare release:perform
+          
+      - name: Publish JAR prepare
+        run: ./mvnw -B release:prepare
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          
+
       - name: Extract Maven project version
         run: echo ::set-output name=version::$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
         id: project
 
       - name: Show extracted Maven project version
         run: echo ${{ steps.project.outputs.version }}
+        
+      - name: Publish JAR perform
+        run: ./mvnw -B release:perform
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
