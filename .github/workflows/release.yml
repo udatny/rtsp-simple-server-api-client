@@ -49,15 +49,10 @@ jobs:
           git config user.email "actions@github.com"
           git config user.name "GitHub Actions"
           
-      - name: Publish JAR prepare
-        run: ./mvnw -B release:prepare
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Extract Maven project version
         run: echo ::set-output name=version::$(./mvnw help:evaluate -Dexpression=project.version -q -DforceStdout | cut -d- -f1)
         id: project
- 
+
       - name: Show extracted Maven project version
         run: echo ${{ steps.project.outputs.version }}
         
