@@ -15,7 +15,7 @@ jobs:
       # Label used to access the service container
       rtsp:
         # Docker Hub image
-        image: aler9/rtsp-simple-server:v0.17.6
+        image: aler9/rtsp-simple-server:v0.17.7
         #
         ports:
           # Opens tcp port 6379 on the host and service container
