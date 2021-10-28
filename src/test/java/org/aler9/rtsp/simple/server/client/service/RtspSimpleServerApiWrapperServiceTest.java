@@ -138,7 +138,14 @@ public class RtspSimpleServerApiWrapperServiceTest {
 
     @Test
     void testGetRtspsSessionsList() {
-	rtspSimpleServerApiWrapperService.getRtspsSessionsList();
+	try {
+	    rtspSimpleServerApiWrapperService.getRtspsSessionsList();
+	    throw new AssertionError("must fail since rtsps is not set up in test server");
+
+	} catch (RtspSimpleServerApiException e) {
+
+	}
+
     }
 
     @Test
